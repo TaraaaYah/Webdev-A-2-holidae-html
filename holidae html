@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- VIEWPORT TAG: Makes the site responsive on mobile devices.
+       Without this, mobile browsers shrink the desktop version down,
+       making text and buttons too small to read or tap. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Holidae — Find Your Holiday</title>
+
+  <!-- Google Fonts: Playfair Display (headings) + Outfit (body text) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="holidae_CSS.css">
+</head>
+<body>
+
+  <!-- Animated star field (populated by JavaScript) -->
+  <div class="stars" id="stars"></div>
+
+  <!-- ═══════════════════════════════════════════════
+       NAVIGATION BAR
+       Fixed to the top of the screen on all devices.
+       On mobile, nav links are hidden and replaced
+       with a hamburger icon (controlled by JS).
+  ════════════════════════════════════════════════ -->
+  <nav>
+    <a href="#" class="logo">Holi<span>dae</span></a>
+
+    <!-- Desktop navigation links -->
+    <ul class="nav-links">
+      <li><a href="#destinations">Destinations</a></li>
+      <li><a href="#book">Plan &amp; Book</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#book" class="nav-cta">Book Now</a></li>
+    </ul>
+
+    <!-- Hamburger icon — visible on mobile only -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════
+       MOBILE FULL-SCREEN MENU
+       Hidden by default. JavaScript adds the class
+       "open" when the hamburger is tapped, which
+       makes it visible via CSS.
+  ════════════════════════════════════════════════ -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="menu-close" id="menuClose">&#215;</button>
+    <a href="#destinations" class="menu-link">Destinations</a>
+    <a href="#book" class="menu-link">Plan &amp; Book</a>
+    <a href="#how" class="menu-link">How it works</a>
+    <a href="#book" class="menu-link gold">Book Now &#8594;</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       HERO SECTION
+       Full-screen background photo with search form.
+       The search-box collapses to a stacked column
+       on mobile via a CSS media query.
+  ════════════════════════════════════════════════ -->
+  <section class="hero">
+    <!-- Background photo (set in CSS as background-image) -->
+    <div class="hero-photo"></div>
+
+    <!-- Badge -->
+    <div class="hero-badge">78% of our users book on mobile</div>
+
+    <!-- Main heading -->
+    <h1>Your next<br><em>holiday</em> starts<br>right here.</h1>
+
+    <!-- Subheading -->
+    <p class="hero-sub">
+      Holidae finds you the perfect break — from city escapes to coastal
+      retreats — beautifully presented on any device, from any screen.
+    </p>
+
+    <!-- Search form
+         On desktop: 3 fields + button in a row (CSS grid)
+         On mobile: stacks to a single column (media query) -->
+    <div class="search-box">
+      <div class="search-field">
+        <label for="destination">Destination</label>
+        <input type="text" id="destination" placeholder="Where to?" />
+      </div>
+      <div class="search-field">
+        <label for="checkin">Check-in</label>
+        <input type="date" id="checkin" />
+      </div>
+      <div class="search-field">
+        <label for="guests-search">Guests</label>
+        <select id="guests-search">
+          <option>1 guest</option>
+          <option selected>2 guests</option>
+          <option>3 guests</option>
+          <option>4+ guests</option>
+        </select>
+      </div>
+      <button class="search-btn">Search &#8594;</button>
+    </div>
+
+    <!-- Key stats -->
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-num">2,400+</div>
+        <div class="stat-label">Destinations</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">78%</div>
+        <div class="stat-label">Mobile bookings</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4.9&#9733;</div>
+        <div class="stat-label">Average rating</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       DESTINATION CARDS
+       3 columns on desktop → 2 on tablet → 1 on mobile
+       Cards animate in on scroll (Intersection Observer in JS)
+       Photos loaded lazily (loading="lazy")
+  ════════════════════════════════════════════════ -->
+  <section id="destinations">
+    <div class="destinations">
+      <div class="destinations-header">
+        <div>
+          <div class="section-label">Popular picks</div>
+          <h2>Top destinations</h2>
+        </div>
+        <a href="#" class="view-all">View all &#8594;</a>
+      </div>
+
+      <div class="cards-scroll">
+
+        <!-- Card 1: Swiss Alps -->
+        <div class="dest-card">
+          <div class="card-img">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80"
+                 alt="Snow-capped Swiss Alps mountains" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <span class="card-badge">&#127956; Adventure</span>
+          </div>
+          <div class="card-body">
+            <div class="card-location">Switzerland</div>
+            <div class="card-title">Swiss Alps Retreat</div>
+            <p class="card-desc">Crisp mountain air and panoramic views across the Bernese Oberland.</p>
+            <div class="card-meta">
+              <div class="card-price">from <strong>&#163;189</strong>/night</div>
+              <div class="card-rating">&#9733; 4.9</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Santorini -->
+        <div class="dest-card">
+          <div class="card-img">
+            <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80"
+                 alt="Whitewashed buildings overlooking the Aegean Sea in Santorini" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <span class="card-badge">&#127754; Beach</span>
+          </div>
+          <div class="card-body">
+            <div class="card-location">Greece</div>
+            <div class="card-title">Santorini Sunset</div>
+            <p class="card-desc">Iconic whitewashed cliffs, volcanic beaches, and legendary Aegean sunsets.</p>
+            <div class="card-meta">
+              <div class="card-price">from <strong>&#163;220</strong>/night</div>
+              <div class="card-rating">&#9733; 5.0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Northern Lights -->
+        <div class="dest-card">
+          <div class="card-img">
+            <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=600&q=80"
+                 alt="Aurora borealis northern lights over Norway" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <span class="card-badge">&#127756; Nature</span>
+          </div>
+          <div class="card-body">
+            <div class="card-location">Norway</div>
+            <div class="card-title">Northern Lights Lodge</div>
+            <p class="card-desc">Sleep under the aurora borealis in a glass-roofed cabin deep in Lapland.</p>
+            <div class="card-meta">
+              <div class="card-price">from <strong>&#163;310</strong>/night</div>
+              <div class="card-rating">&#9733; 4.8</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Amalfi Coast -->
+        <div class="dest-card">
+          <div class="card-img">
+            <img src="https://images.unsplash.com/photo-1543039625-14cbd3802e7d?w=600&q=80"
+                 alt="Colourful clifftop villages on the Amalfi Coast, Italy" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <span class="card-badge">&#127819; Culture</span>
+          </div>
+          <div class="card-body">
+            <div class="card-location">Italy</div>
+            <div class="card-title">Amalfi Coast Drive</div>
+            <p class="card-desc">Clifftop villages, lemon groves, and turquoise waters along the Tyrrhenian Sea.</p>
+            <div class="card-meta">
+              <div class="card-price">from <strong>&#163;195</strong>/night</div>
+              <div class="card-rating">&#9733; 4.9</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Maldives -->
+        <div class="dest-card">
+          <div class="card-img">
+            <img src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?w=600&q=80"
+                 alt="Overwater bungalows in the turquoise Maldives ocean" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <span class="card-badge">&#128026; Luxury</span>
+          </div>
+          <div class="card-body">
+            <div class="card-location">Maldives</div>
+            <div class="card-title">Overwater Villa</div>
+            <p class="card-desc">Wake up above the Indian Ocean in a private villa with a direct-drop pool.</p>
+            <div class="card-meta">
+              <div class="card-price">from <strong>&#163;480</strong>/night</div>
+              <div class="card-rating">&#9733; 5.0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6: Kyoto -->
+        <div class="dest-card">
+          <div class="card-img">
+            <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80"
+                 alt="Traditional torii gates at a Kyoto shrine, Japan" loading="lazy">
+            <div class="card-img-overlay"></div>
+            <span class="card-badge">&#9961; Heritage</span>
+          </div>
+          <div class="card-body">
+            <div class="card-location">Japan</div>
+            <div class="card-title">Kyoto Temple Stay</div>
+            <p class="card-desc">Ancient shrines, bamboo forests, and ryokan hospitality in old Japan.</p>
+            <div class="card-meta">
+              <div class="card-price">from <strong>&#163;165</strong>/night</div>
+              <div class="card-rating">&#9733; 4.9</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /cards-scroll -->
+    </div><!-- /destinations -->
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       FEATURED DESTINATION BANNER
+       Full-width cinematic image with text overlay
+  ════════════════════════════════════════════════ -->
+  <section class="featured-section">
+    <div class="featured-banner">
+      <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=1400&q=80"
+           alt="Rice terraces and palm trees in Bali, Indonesia" loading="lazy">
+      <div class="featured-content">
+        <span class="featured-tag">&#10022; Featured this month</span>
+        <h3>Bali: Island<br>of the Gods</h3>
+        <p>Rice terraces, surf breaks, and sacred temples. Seven days of pure discovery from &#163;1,299 per person.</p>
+        <a href="#book" class="featured-btn">Explore Bali &#8594;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       PHOTO GALLERY
+       CSS Grid mosaic layout.
+       First image spans two rows on desktop.
+       Collapses to 2-column grid on mobile.
+  ════════════════════════════════════════════════ -->
+  <section>
+    <div class="gallery-section">
+      <div class="section-label">Inspire me</div>
+      <h2>See the world differently</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80"
+               alt="View from an aeroplane window above the clouds" loading="lazy">
+          <div class="gallery-caption">Above the clouds</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1455156218388-5e61b526818b?w=400&q=80"
+               alt="Golden sand dunes in the Sahara Desert" loading="lazy">
+          <div class="gallery-caption">Sahara dunes</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=80"
+               alt="Aerial view of green Nordic forest" loading="lazy">
+          <div class="gallery-caption">Nordic forests</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=400&q=80"
+               alt="Rocky coastal cliffs overlooking the sea" loading="lazy">
+          <div class="gallery-caption">Coastal cliffs</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1504150558240-0b4fd8946624?w=400&q=80"
+               alt="City skyline illuminated at night" loading="lazy">
+          <div class="gallery-caption">City lights</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       BOOKING CALCULATOR
+       Split layout on desktop (photo | calculator)
+       Stacks vertically on mobile (media query)
+       All price maths handled by JavaScript
+  ════════════════════════════════════════════════ -->
+  <section id="book" class="book-section">
+    <div class="booking-section">
+
+      <!-- Left panel: photo with text overlay -->
+      <div class="booking-photo">
+        <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=700&q=80"
+             alt="Luxury hotel swimming pool at sunset" loading="lazy">
+        <div class="booking-photo-text">
+          <h3>Plan your perfect stay</h3>
+          <p>Transparent pricing — see the full cost before you commit.</p>
+          <ul class="booking-perks">
+            <li><div class="perk-dot">&#10003;</div> Free cancellation up to 48hrs</li>
+            <li><div class="perk-dot">&#10003;</div> Breakfast included in all rates</li>
+            <li><div class="perk-dot">&#10003;</div> Instant booking confirmation</li>
+            <li><div class="perk-dot">&#10003;</div> 24/7 concierge support</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right panel: interactive calculator -->
+      <div class="booking-calc">
+        <div class="calc-title">Calculate your cost</div>
+
+        <!-- Stepper controls for guests and nights -->
+        <div class="calc-grid">
+          <div class="calc-field">
+            <label>Guests</label>
+            <div class="stepper">
+              <!-- onclick calls the adj() function in JavaScript -->
+              <button onclick="adj('guests', -1)">&#8722;</button>
+              <span class="stepper-val" id="guests-val">2</span>
+              <button onclick="adj('guests', 1)">+</button>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label>Nights</label>
+            <div class="stepper">
+              <button onclick="adj('nights', -1)">&#8722;</button>
+              <span class="stepper-val" id="nights-val">1</span>
+              <button onclick="adj('nights', 1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Price breakdown — updated in real time by JavaScript -->
+        <div class="calc-breakdown">
+          <div class="breakdown-row">
+            <span id="rate-label">&#163;150 &times; 1 night</span>
+            <span id="base-amt">&#163;150</span>
+          </div>
+          <!-- Extra guest row — hidden by default, shown by JS when guests > 1 -->
+          <div class="breakdown-row" id="extra-row" style="display:none;">
+            <span id="extra-label">Extra guests</span>
+            <span id="extra-amt">&#163;0</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Taxes &amp; fees</span>
+            <span id="tax-amt">&#163;15</span>
+          </div>
+          <div class="breakdown-row total">
+            <span>Total</span>
+            <span class="val" id="total">&#163;165</span>
+          </div>
+        </div>
+
+        <!-- Book Now button — triggers JS alert (prototype only) -->
+        <button class="book-btn"
+                onclick="alert('Booking confirmed! Thank you for choosing Holidae.')">
+          Book Now &#8594;
+        </button>
+      </div><!-- /booking-calc -->
+
+    </div><!-- /booking-section -->
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       HOW IT WORKS
+       4-step process grid.
+       4 columns on desktop → 2 on tablet → 1 on mobile
+       Steps animate in on scroll (JS Intersection Observer)
+  ════════════════════════════════════════════════ -->
+  <section id="how">
+    <div class="how-section">
+      <div class="section-label">Simple process</div>
+      <h2>How Holidae works</h2>
+      <p class="section-sub">From dream to destination in four easy steps — optimised for any device.</p>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-title">Search</div>
+          <p class="step-desc">Enter your destination, dates and guests using our touch-friendly search bar.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-title">Explore</div>
+          <p class="step-desc">Browse swipeable destination cards on mobile, or the full grid on desktop.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-title">Calculate</div>
+          <p class="step-desc">Use our live price calculator to see the full transparent cost — no hidden extras.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-title">Book</div>
+          <p class="step-desc">Confirm instantly. Receive your itinerary and get ready for adventure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       HOW IT WAS BUILT (tech section)
+       2-column grid on desktop → 1 column on mobile
+       Cards animate in on scroll (JS)
+  ════════════════════════════════════════════════ -->
+  <section class="tech-bg">
+    <div class="tech-section">
+      <div class="section-label">Built mobile-first</div>
+      <h2>How we built it</h2>
+      <p class="section-sub">Engineered for the 78% of users on mobile using modern responsive web techniques.</p>
+      <div class="tech-grid">
+        <div class="tech-card" data-num="1">
+          <div class="tech-tag">HTML</div>
+          <h3>Semantic structure</h3>
+          <p>Clean, accessible HTML with a proper <code>&lt;meta viewport&gt;</code> tag ensures mobile browsers render at the correct scale — never a shrunk-down desktop layout.</p>
+        </div>
+        <div class="tech-card" data-num="2">
+          <div class="tech-tag">CSS</div>
+          <h3>Media queries &amp; flex grids</h3>
+          <p>Media queries switch from a 3-column desktop grid to a single-column mobile layout at 768px. Flexbox percentages make every element scale fluidly from iPhone to iMac.</p>
+        </div>
+        <div class="tech-card" data-num="3">
+          <div class="tech-tag">JavaScript</div>
+          <h3>Interactive calculator</h3>
+          <p>Live price breakdowns, scroll-triggered animations, and a mobile hamburger menu — built without any framework, from simple hide/show to real-time arithmetic.</p>
+        </div>
+        <div class="tech-card" data-num="4">
+          <div class="tech-tag">Design</div>
+          <h3>Touch-friendly UI</h3>
+          <p>Book Now buttons are a minimum of 52px tall on mobile to prevent fat-finger errors. Desktop users see more at once for confident, informed booking decisions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-logo">Holi<span>dae</span></div>
+    <p class="footer-tagline">Find your holiday. Book with confidence.</p>
+    <ul class="footer-links">
+      <li><a href="#">About</a></li>
+      <li><a href="#">Destinations</a></li>
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <p class="footer-copy">&#169; 2026 Holidae. A responsive website prototype.</p>
+  </footer>
+
+  <!-- Link to external JavaScript file -->
+  <script src="holidae_JS.js"></script>
+
+</body>
+</html>
